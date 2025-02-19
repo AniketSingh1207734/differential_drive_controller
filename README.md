@@ -83,4 +83,12 @@ ros2 topic echo /left_wheel_rpm
 ros2 topic echo /right_wheel_rpm
 ```
 
+### 10. Waypoint Navigation
+
+For waypoint navigation, run the following command in a new terminal:
+
+```bash
+ros2 run differential_drive_controller waypoint_navigation.py --ros-args -p waypoint_1_x:=2.0 -p waypoint_1_y:=2.0 -p waypoint_2_x:=4.0 -p waypoint_2_y:=3.0
+```
+
 Now you can monitor the robot's wheel speeds and see the robot navigate in both Gazebo and RViz.

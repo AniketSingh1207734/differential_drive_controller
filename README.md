@@ -1,73 +1,86 @@
-Differential Drive Robot Controller
+# Differential Drive Controller - ROS 2 Project
 
-This repository contains a ROS 2 package for controlling a differential drive robot. It integrates with the ROS 2 navigation stack and implements RPM computation for each wheel. Follow the instructions below to set up the workspace, build the packages, and run the simulation and controller.
+This repository contains a ROS 2 package that implements a differential drive robot controller with RPM computation for each wheel. The robot is simulated in Gazebo with navigation functionality using Nav2 and visualized in RViz.
 
-Prerequisites
+## Setup Instructions
 
-ROS 2 (Foxy, Galactic, or Humble)
+### 1. Import the Nav2 Task Package
 
-Colcon build tool
+First, import the Nav2 task package from the repository into your ROS 2 workspace:
 
-Installation and Setup
-
-Step 1: Clone and Build the Navigation Package
-
-Clone the Nav2 Task repository into your ROS 2 workspace:
-
+```bash
 cd ~/ros2_ws/src
+
 git clone https://github.com/AniketSingh1207734/Nav2_task.git
+```
 
-Build the workspace:
+### 2. Build the Nav2 Task Package
 
+Navigate to the root of your workspace and build the workspace:
+
+```bash
 cd ~/ros2_ws
+
 colcon build
+```
 
-Step 2: Clone and Build the Differential Drive Controller
+### 3. Import the Differential Drive Controller Package
 
-Clone the Differential Drive Controller repository into your ROS 2 workspace:
+Next, import the differential drive controller package into your workspace:
 
-cd ~/ros2_ws/src
+```bash
 git clone https://github.com/AniketSingh1207734/differential_drive_controller.git
+```
 
-Build the workspace again to include the differential drive controller:
+### 4. Build the Workspace
 
-cd ~/ros2_ws
+After importing both repositories, build the entire workspace again:
+
+```bash
 colcon build
+```
 
-Step 3: Source the Workspace
+### 5. Source the Workspace
 
-Before running any commands, ensure you source the workspace in every new terminal session:
+Once the workspace is built, open a new terminal and source your workspace:
 
+```bash
 source ~/ros2_ws/install/setup.bash
+source /opt/ros/humble/setup.bash
+```
 
-Running the Simulation and Controller
+### 6. Launch Gazebo with the Robot
 
-Step 4: Launch the Simulation
+To start the simulation, launch Gazebo with the robot inside a world (e.g., `obstacle.world`):
 
-Open a new terminal, source the workspace, and launch the robot simulation in a world with obstacles:
-
+```bash
 ros2 launch my_robot launch_sim.launch.py world:=./ros2_ws/src/my_robot/worlds/obstacle.world
+```
 
-Step 5: Launch the Navigation Stack
+### 7. Launch the Nav2 Navigation Stack
 
-In a separate terminal, source the workspace, and launch the ROS 2 navigation stack:
+In another terminal, source your workspace and launch the Nav2 stack:
 
+```bash
+source ~/ros2_ws/install/setup.bash
 ros2 launch my_robot nav2_launch.launch.py
+```
 
-Step 6: Run the Differential Drive Controller
+### 8. Run the Differential Drive Controller
 
-In another terminal, source the workspace, and run the differential drive controller:
+Open a new terminal, source your workspace, and run the differential drive controller node:
 
+```bash
 ros2 run differential_drive_controller differential_drive_controller
+```
 
-Step 7: Monitor Wheel RPM Topics
+### 9. Echo the Wheel RPMs
 
-In separate terminals, monitor the RPM values of the left and right wheels using the following commands:
+To monitor the wheel RPMs, open separate terminals and run the following commands:
 
+```bash
 ros2 topic echo /left_wheel_rpm
-
 ros2 topic echo /right_wheel_rpm
+```
 
-Summary
-
-This setup provides a differential drive robot simulation with navigation and RPM monitoring. You can modify the controller logic, navigation parameters, and world configuration for further experimentation.
+Now you can monitor the robot's wheel speeds and see the robot navigate in both Gazebo and RViz.
